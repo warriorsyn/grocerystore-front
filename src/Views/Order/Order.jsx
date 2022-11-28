@@ -3,8 +3,6 @@ import "../../Styles/App.css";
 import Button from "react-bootstrap/Button";
 import {api} from "../../Services/api";
 
-const token = "fase";
-
 function Order() {
     const [orders, setOrder] = useState([]);
     const userid = localStorage.getItem("@grocery:userid");
@@ -28,11 +26,16 @@ function Order() {
         })
     }
 
-
+    function closeOrder(orderId) {
+        api.patch(`/order/${orderId}`).then(res => {
+            alert('Pedido fechado com sucesso!');
+            getOrders()
+        });
+    }
 
     return (
         <div>
-            {token === "false" ? (
+
                 <div class="App">
                     <div class="App-header">
                         <div className="cx">
@@ -40,7 +43,7 @@ function Order() {
                         </div>
                     </div>
                 </div>
-            ) :
+
                 <div className="container">
                     <table className="table">
                         <thead>
@@ -62,6 +65,7 @@ function Order() {
                                     <td className="align-middle">{item.product.price * item.quantity}</td>
                                     <td className="align-middle">{item.isClosed ? 'Fechado' : 'Aberto'}</td>
                                     <td>
+                                        <Button className="bt-order" variant="primary" size="sm" disabled={item.isClosed} onClick={() => closeOrder(item.id)}>Finalizar Reserva</Button>
                                         <Button className="bt-order" variant="primary" size="sm" onClick={() => deleteOrder(item.id)}>Excluir Reserva</Button>
                                     </td>
                                 </tr>
@@ -69,7 +73,7 @@ function Order() {
                         </tbody>
                     </table>
                 </div>
-            }
+
         </div >
     );
 }
