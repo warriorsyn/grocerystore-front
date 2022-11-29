@@ -35,15 +35,6 @@ function Order() {
 
     return (
         <div>
-
-                <div class="App">
-                    <div class="App-header">
-                        <div className="cx">
-                            <h1>Faça Login</h1>
-                        </div>
-                    </div>
-                </div>
-
                 <div className="container">
                     <table className="table">
                         <thead>
@@ -57,7 +48,7 @@ function Order() {
                             </tr>
                         </thead>
                         <tbody>
-                            {orders.length && orders.map(item => (
+                            {orders && orders.map(item => (
                                 <tr>
                                     <td className="align-middle">{item.product.name}</td>
                                     <td className="align-middle">{item.quantity}</td>
@@ -70,6 +61,10 @@ function Order() {
                                     </td>
                                 </tr>
                             ))}
+
+                            {!orders.length && (
+                                <tr><span>Você não possui reservas</span></tr>
+                            )}
                         </tbody>
                     </table>
                 </div>

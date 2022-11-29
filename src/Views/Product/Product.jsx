@@ -36,7 +36,7 @@ function Product() {
                             </tr>
                         </thead>
                         <tbody>
-                            {  products.length && products.map(item => (
+                            {products && products.map(item => (
                                 <tr>
                                     <td className="align-middle">{item.name}</td>
                                     <td className="align-middle">{item.stock}</td>
@@ -46,6 +46,7 @@ function Product() {
                                     </td>
                                 </tr>
                             )) }
+
                         </tbody>
                     </table>
                 </div>
